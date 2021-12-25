@@ -23,6 +23,9 @@ down-all:
 auth-bash:
 	docker-compose exec auth bash
 
+test:
+	docker-compose exec auth composer test
+
 
 gen-producer:
 	docker-compose exec hyperf php bin/hyperf.php gen:amqp-producer DemoProducer

@@ -83,6 +83,7 @@ class UserController extends AbstractController
     }
 
     #[RequestMapping(path:"signout", methods: "post")]
+    #[Middleware(AuthMiddleware::class)]
     public function signout()
     {
         return $this->response
