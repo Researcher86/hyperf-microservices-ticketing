@@ -1,0 +1,68 @@
+version: '3.9'
+
+services:
+#    client:
+#        build:
+#            context: .
+#            dockerfile: Dockerfile
+#            target: client
+#        container_name: client
+#        ports:
+#            -   "3000:3000"
+#        volumes:
+#            -   ./client:/opt/www
+#        command: npm start
+#        tty: true
+#        depends_on:
+#            - posts
+#            - comments
+
+    auth:
+        build:
+            context: .
+            dockerfile: Dockerfile
+            target: auth
+        container_name: auth
+        environment:
+            - COMPOSER_ALLOW_SUPERUSER=true
+        ports:
+            -   "9501:9501"
+        volumes:
+            -   ./auth:/opt/www
+        entrypoint: ["php", "/opt/www/bin/hyperf.php", "server:watch"]
+        depends_on:
+            - posts-mysql
+            - rabbit-mq
+
+    auth-mysql:
+        image: mysql:5.7
+        restart: unless-stopped
+        container_name: auth-mysql
+        environment:
+            - MYSQL_DATABASE=auth
+            - MYSQL_ROOT_PASSWORD=root
+            - MYSQL_ALLOW_EMPTY_PASSWORD=1
+        ports:
+            - "3310:3306"
+        volumes:
+            - auth_db_data:/var/lib/mysql
+
+    redis:
+        image: redis:6.0
+        restart: unless-stopped
+
+    rabbit-mq:
+        image: rabbitmq:3.8.9-management
+        restart: unless-stopped
+        container_name: rabbit-mq
+        ports:
+            - "15672:15672"
+        environment:
+            RABBITMQ_DEFAULT_USER: guest
+            RABBITMQ_DEFAULT_PASS: guest
+
+volumes:
+    auth_db_data:
+        name: auth_db_data
+        driver: local
+
