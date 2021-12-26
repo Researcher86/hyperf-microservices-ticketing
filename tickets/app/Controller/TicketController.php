@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Tickets\Controller;
 
+use Tickets\Amqp\Producer\TicketCreated;
+use Tickets\Amqp\Producer\TicketUpdated;
 use Tickets\Middleware\AuthMiddleware;
 use Tickets\Model\Ticket;
 use Tickets\Request\TicketCreateRequest;
@@ -50,6 +52,8 @@ class TicketController extends AbstractController
     {
         $ticket = Ticket::create($request->validated() + ['user_id' => $this->request->getAttribute('userId')]);
 
+        $this->producer->produce(new TicketCreated($ticket));
+
         return $this->response
             ->json($ticket)
             ->withStatus(Status::CREATED);
@@ -71,6 +75,8 @@ class TicketController extends AbstractController
         }
 
         $ticket->update($request->validated());
+
+        $this->producer->produce(new TicketUpdated($ticket));
 
         return $this->response
             ->json($ticket)

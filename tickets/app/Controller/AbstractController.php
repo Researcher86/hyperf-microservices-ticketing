@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tickets\Controller;
 
+use Hyperf\Amqp\Producer;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Hyperf\HttpServer\Contract\ResponseInterface;
@@ -19,4 +20,7 @@ abstract class AbstractController
 
     #[Inject()]
     protected ResponseInterface $response;
+
+    #[Inject()]
+    protected Producer $producer;
 }
