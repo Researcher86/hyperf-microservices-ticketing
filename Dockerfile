@@ -40,6 +40,9 @@ ENTRYPOINT ["php", "/opt/www/bin/hyperf.php", "start"]
 FROM base as auth
 EXPOSE 9501
 
+FROM base as tickets
+EXPOSE 9502
+
 
 FROM node:17-alpine as node-base
 WORKDIR /opt/www

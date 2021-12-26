@@ -23,8 +23,12 @@ client-bash:
 auth-bash:
 	docker-compose exec auth bash
 
+tickets-bash:
+	docker-compose exec tickets bash
+
 test:
-	docker-compose exec auth composer test
+	#docker-compose exec auth composer test
+	docker-compose exec tickets composer test
 
 
 gen-producer:
@@ -48,9 +52,12 @@ user-gen-model:
 migrate:
 	docker-compose exec auth php bin/hyperf.php migrate
 	docker-compose exec auth php bin/hyperf.php users:fixture
+	docker-compose exec tickets php bin/hyperf.php migrate
+	docker-compose exec tickets php bin/hyperf.php tickets:fixture
 
 php-clear:
 	rm -rf auth/runtime/container
+	rm -rf tickets/runtime/container
 
 # make bench
 bench:

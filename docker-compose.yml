@@ -46,8 +46,39 @@ services:
         volumes:
             - auth_db_data:/var/lib/mysql
 
+    tickets:
+        build:
+            context: .
+            dockerfile: Dockerfile
+            target: tickets
+        container_name: tickets
+        environment:
+            - COMPOSER_ALLOW_SUPERUSER=true
+        ports:
+            -   "9502:9502"
+        volumes:
+            -   ./tickets:/opt/www
+        entrypoint: ["php", "/opt/www/bin/hyperf.php", "server:watch"]
+        depends_on:
+            - tickets-mysql
+            - rabbit-mq
+
+    tickets-mysql:
+        image: mysql:5.7
+        restart: unless-stopped
+        container_name: tickets-mysql
+        environment:
+            - MYSQL_DATABASE=tickets
+            - MYSQL_ROOT_PASSWORD=root
+            - MYSQL_ALLOW_EMPTY_PASSWORD=1
+        ports:
+            - "3311:3306"
+        volumes:
+            - tickets_db_data:/var/lib/mysql
+
     redis:
         image: redis:6.0
+        container_name: redis
         restart: unless-stopped
 
     rabbit-mq:
@@ -63,5 +94,8 @@ services:
 volumes:
     auth_db_data:
         name: auth_db_data
+        driver: local
+    tickets_db_data:
+        name: tickets_db_data
         driver: local
 
