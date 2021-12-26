@@ -41,8 +41,8 @@ FROM base as auth
 EXPOSE 9501
 
 
-#FROM node:17-alpine as node-base
-#WORKDIR /opt/www
-#
-#FROM node-base as client
-#EXPOSE 3000
+FROM node:17-alpine as node-base
+WORKDIR /opt/www
+
+FROM node-base as client
+EXPOSE 3000

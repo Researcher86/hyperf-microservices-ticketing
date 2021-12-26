@@ -17,8 +17,8 @@ down-all:
 	docker-compose down -v
 
 
-#client-bash:
-#	docker-compose exec client sh
+client-bash:
+	docker-compose exec client sh
 
 auth-bash:
 	docker-compose exec auth bash
