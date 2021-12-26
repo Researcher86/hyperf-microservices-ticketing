@@ -34,6 +34,8 @@ class UsersFixtureCommand extends HyperfCommand
     {
         $this->line('Load users.', 'info');
 
+        User::truncate();
+
         User::create([
             'email' => 'admin@admin.com',
             'password' => password_hash('admin', PASSWORD_DEFAULT)
