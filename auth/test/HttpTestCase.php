@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Tests;
+namespace Auth\Tests;
 
 use Hyperf\DbConnection\Db;
 use Hyperf\Testing\Client;

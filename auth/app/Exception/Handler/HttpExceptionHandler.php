@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Exception\Handler;
+namespace Auth\Exception\Handler;
 
 use Hyperf\ExceptionHandler\ExceptionHandler;
 use Hyperf\HttpMessage\Exception\HttpException;

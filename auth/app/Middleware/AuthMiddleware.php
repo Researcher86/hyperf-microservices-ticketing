@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Middleware;
+namespace Auth\Middleware;
 
-use App\Model\User;
-use App\Service\JwtService;
+use Auth\Model\User;
+use Auth\Service\JwtService;
 use Hyperf\Contract\TranslatorInterface;
 use Hyperf\HttpServer\Contract\ResponseInterface as HttpResponse;
 use Psr\Http\Message\ResponseInterface;

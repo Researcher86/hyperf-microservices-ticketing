@@ -27,7 +27,7 @@ tickets-bash:
 	docker-compose exec tickets bash
 
 test:
-	#docker-compose exec auth composer test
+	docker-compose exec auth composer test
 	docker-compose exec tickets composer test
 
 

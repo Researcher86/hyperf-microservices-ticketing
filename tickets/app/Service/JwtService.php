@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Service;
+namespace Tickets\Service;
 
 use Exception;
 use Firebase\JWT\JWT;

@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use App\Middleware\AuthMiddleware;
-use App\Middleware\CorsMiddleware;
+use Tickets\Middleware\AuthMiddleware;
+use Tickets\Middleware\CorsMiddleware;
 use Hyperf\Session\Middleware\SessionMiddleware;
 use Hyperf\Validation\Middleware\ValidationMiddleware;
 

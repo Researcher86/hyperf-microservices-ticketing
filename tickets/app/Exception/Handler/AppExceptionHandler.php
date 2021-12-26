@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Exception\Handler;
+namespace Tickets\Exception\Handler;
 
-use App\Exception\BusinessException;
+use Tickets\Exception\BusinessException;
 use Hyperf\ExceptionHandler\ExceptionHandler;
 use Hyperf\HttpMessage\Stream\SwooleStream;
 use Psr\Http\Message\ResponseInterface;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use App\Service\JwtService;
+use Tickets\Service\JwtService;
 use Hyperf\Logger\LoggerFactory;
 use Psr\Container\ContainerInterface;
 

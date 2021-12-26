@@ -2,7 +2,7 @@
 
 declare (strict_types=1);
 
-namespace App\Model;
+namespace Tickets\Model;
 
 use Hyperf\DbConnection\Model\Model;
 

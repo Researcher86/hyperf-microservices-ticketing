@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Tests;
+namespace Tickets\Tests;
 
-use App\Service\JwtService;
+use Tickets\Service\JwtService;
 use Hyperf\DbConnection\Db;
 use Hyperf\Testing\Client;
 use Hyperf\Utils\Packer\JsonPacker;

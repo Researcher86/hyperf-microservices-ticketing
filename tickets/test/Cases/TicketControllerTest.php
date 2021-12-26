@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Cases;
+namespace Tickets\Tests\Cases;
 
-use App\Model\Ticket;
-use App\Tests\HttpTestCase;
+use Tickets\Model\Ticket;
+use Tickets\Tests\HttpTestCase;
 use Hyperf\HttpMessage\Server\Response;
 use Swoole\Http\Status;
 

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Middleware;
+namespace Tickets\Middleware;
 
-use App\Model\User;
-use App\Service\JwtService;
+use Tickets\Model\User;
+use Tickets\Service\JwtService;
 use Hyperf\Contract\TranslatorInterface;
 use Hyperf\HttpServer\Contract\ResponseInterface as HttpResponse;
 use Psr\Http\Message\ResponseInterface;

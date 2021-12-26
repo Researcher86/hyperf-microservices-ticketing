@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Controller;
+namespace Tickets\Controller;
 
-use App\Middleware\AuthMiddleware;
-use App\Model\Ticket;
-use App\Request\TicketCreateRequest;
-use App\Request\TicketUpdateRequest;
+use Tickets\Middleware\AuthMiddleware;
+use Tickets\Model\Ticket;
+use Tickets\Request\TicketCreateRequest;
+use Tickets\Request\TicketUpdateRequest;
 use Hyperf\HttpServer\Annotation\Controller;
 use Hyperf\HttpServer\Annotation\Middleware;
 use Hyperf\HttpServer\Annotation\RequestMapping;

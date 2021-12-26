@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Cases;
+namespace Auth\Tests\Cases;
 
-use App\Model\User;
-use App\Tests\HttpTestCase;
+use Auth\Model\User;
+use Auth\Tests\HttpTestCase;
 use Hyperf\HttpMessage\Server\Response;
 use Swoole\Http\Status;
 

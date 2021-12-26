@@ -51,13 +51,13 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "app/"
+            "Auth\\": "app/"
         },
         "files": []
     },
     "autoload-dev": {
         "psr-4": {
-            "App\\Tests\\": "./test/"
+            "Auth\\Tests\\": "./test/"
         }
     },
     "minimum-stability": "dev",

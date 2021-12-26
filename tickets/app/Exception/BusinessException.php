@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Exception;
+namespace Tickets\Exception;
 
-use App\Constants\ErrorCode;
+use Tickets\Constants\ErrorCode;
 use Hyperf\Server\Exception\ServerException;
 use Throwable;
 

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Exception\Handler\Validation;
+namespace Auth\Exception\Handler\Validation;
 
 use Hyperf\ExceptionHandler\ExceptionHandler;
 use Hyperf\HttpMessage\Stream\SwooleStream;

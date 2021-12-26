@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-use App\Exception\Handler\AppExceptionHandler;
-use App\Exception\Handler\DefaultExceptionHandler;
-use App\Exception\Handler\HttpExceptionHandler;
-use App\Exception\Handler\Validation\ValidationExceptionHandler;
+use Auth\Exception\Handler\AppExceptionHandler;
+use Auth\Exception\Handler\DefaultExceptionHandler;
+use Auth\Exception\Handler\HttpExceptionHandler;
+use Auth\Exception\Handler\Validation\ValidationExceptionHandler;
 
 return [
     'handler' => [

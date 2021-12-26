@@ -51,13 +51,13 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "app/"
+            "Tickets\\": "app/"
         },
         "files": []
     },
     "autoload-dev": {
         "psr-4": {
-            "App\\Tests\\": "./test/"
+            "Tickets\\Tests\\": "./test/"
         }
     },
     "minimum-stability": "dev",

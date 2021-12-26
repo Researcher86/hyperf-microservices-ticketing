@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace App\Controller;
+namespace Auth\Controller;
 
-use App\Exception\BusinessException;
-use App\Middleware\AuthMiddleware;
-use App\Model\User;
-use App\Request\SigninRequest;
-use App\Request\SignupRequest;
-use App\Service\JwtService;
+use Auth\Exception\BusinessException;
+use Auth\Middleware\AuthMiddleware;
+use Auth\Model\User;
+use Auth\Request\SigninRequest;
+use Auth\Request\SignupRequest;
+use Auth\Service\JwtService;
 use Hyperf\Contract\TranslatorInterface;
 use Hyperf\HttpServer\Annotation\Controller;
 use Hyperf\HttpServer\Annotation\Middleware;

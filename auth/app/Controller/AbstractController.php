@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Controller;
+namespace Auth\Controller;
 
 use Hyperf\Contract\SessionInterface;
 use Hyperf\Di\Annotation\Inject;
