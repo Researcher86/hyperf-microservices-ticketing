@@ -41,7 +41,10 @@ FROM base as auth
 EXPOSE 9501
 
 FROM base as tickets
-EXPOSE 9502
+EXPOSE 9501
+
+FROM base as orders
+EXPOSE 9501
 
 
 FROM node:17-alpine as node-base

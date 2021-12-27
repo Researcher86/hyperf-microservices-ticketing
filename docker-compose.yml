@@ -15,6 +15,8 @@ services:
         tty: true
         depends_on:
             - auth
+            - tickets
+            - orders
 
     auth:
         build:
@@ -31,7 +33,6 @@ services:
         entrypoint: ["php", "/opt/www/bin/hyperf.php", "server:watch"]
         depends_on:
             - auth-mysql
-            - rabbit-mq
 
     auth-mysql:
         image: mysql:5.7
@@ -55,7 +56,7 @@ services:
         environment:
             - COMPOSER_ALLOW_SUPERUSER=true
         ports:
-            -   "9502:9502"
+            -   "9502:9501"
         volumes:
             -   ./tickets:/opt/www
         entrypoint: ["php", "/opt/www/bin/hyperf.php", "server:watch"]
@@ -75,6 +76,36 @@ services:
             - "3311:3306"
         volumes:
             - tickets_db_data:/var/lib/mysql
+
+    orders:
+        build:
+            context: .
+            dockerfile: Dockerfile
+            target: orders
+        container_name: orders
+        environment:
+            - COMPOSER_ALLOW_SUPERUSER=true
+        ports:
+            -   "9503:9501"
+        volumes:
+            -   ./orders:/opt/www
+        entrypoint: ["php", "/opt/www/bin/hyperf.php", "server:watch"]
+        depends_on:
+            - orders-mysql
+            - rabbit-mq
+
+    orders-mysql:
+        image: mysql:5.7
+        restart: unless-stopped
+        container_name: orders-mysql
+        environment:
+            - MYSQL_DATABASE=orders
+            - MYSQL_ROOT_PASSWORD=root
+            - MYSQL_ALLOW_EMPTY_PASSWORD=1
+        ports:
+            - "3312:3306"
+        volumes:
+            - orders_db_data:/var/lib/mysql
 
     redis:
         image: redis:6.0
@@ -97,5 +128,8 @@ volumes:
         driver: local
     tickets_db_data:
         name: tickets_db_data
+        driver: local
+    orders_db_data:
+        name: orders_db_data
         driver: local
 
