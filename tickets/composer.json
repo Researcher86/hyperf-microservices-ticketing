@@ -75,6 +75,7 @@
             "rm -rf runtime/container"
         ],
         "test": "co-phpunit --prepend test/bootstrap.php -c phpunit.xml --colors=always --testdox",
+        "model-test": "co-phpunit --prepend test/bootstrap.php -c phpunit.xml --colors=always --testdox --filter 'Tickets\\\\Tests\\\\Model\\\\TicketTest'",
         "cs-fix": "php-cs-fixer fix $1",
         "analyse": "phpstan analyse --memory-limit 300M -l 0 -c phpstan.neon ./app ./config",
         "start": [

@@ -16,6 +16,7 @@ class CreateTicketsTable extends Migration
             $table->integer('user_id')->index('user_id_idx');
             $table->string('title');
             $table->integer('price');
+            $table->integer('version');
         });
     }
 

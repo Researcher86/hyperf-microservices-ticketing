@@ -30,8 +30,6 @@ class TicketControllerTest extends HttpTestCase
 
         $data = $this->jsonPacker->unpack((string) $response->getBody());
         $this->assertCount(1, $data);
-
-        $ticket->delete();
     }
 
     public function testGetTicket()
@@ -52,8 +50,6 @@ class TicketControllerTest extends HttpTestCase
         $this->assertEquals(1, $data['user_id']);
         $this->assertEquals('Ticket 1', $data['title']);
         $this->assertEquals(5, $data['price']);
-
-        $ticket->delete();
     }
 
     public function testGetTicketNotFound()
@@ -164,13 +160,15 @@ class TicketControllerTest extends HttpTestCase
 
         $ticket = Ticket::query()->where('user_id', '=', $userId)->where('title', '=', $title)->first();
         $this->assertNotEmpty($ticket);
-
-        $ticket->delete();
     }
 
     public function testUpdateTicketSuccess()
     {
-        $ticket = Ticket::create(['user_id' => $userId = 5, 'title' => 'Ticket', 'price' => 10]);
+        $ticket = Ticket::create([
+            'user_id' => $userId = 5,
+            'title' => 'Ticket',
+            'price' => 10
+        ]);
 
         $token = $this->generateToken(['id' => 5, 'email' => 'test@test.com']);
         $data = ['title' => $title = 'Ticket 2', 'price' => $price = 20];
@@ -187,13 +185,15 @@ class TicketControllerTest extends HttpTestCase
         $this->assertEquals($userId, $ticket->user_id);
         $this->assertEquals($title, $ticket->title);
         $this->assertEquals($price, $ticket->price);
-
-        $ticket->delete();
     }
 
     public function testUpdateTicketUserCannotEditAnotherUsersTicket()
     {
-        $ticket = Ticket::create(['user_id' => 5, 'title' => 'Ticket', 'price' => 10]);
+        $ticket = Ticket::create([
+            'user_id' => 5,
+            'title' => 'Ticket',
+            'price' => 10
+        ]);
 
         $token = $this->generateToken(['id' => 555, 'email' => 'test@test.com']);
         $data = ['title' => 'Ticket 2', 'price' => 20];
@@ -205,7 +205,5 @@ class TicketControllerTest extends HttpTestCase
         );
 
         $this->assertEquals(Status::UNAUTHORIZED, $response->getStatusCode());
-
-        $ticket->delete();
     }
 }

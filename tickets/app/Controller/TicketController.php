@@ -50,7 +50,10 @@ class TicketController extends AbstractController
     #[Middleware(ValidationMiddleware::class)]
     public function create(TicketCreateRequest $request)
     {
-        $ticket = Ticket::create($request->validated() + ['user_id' => $this->request->getAttribute('userId')]);
+        $data = $request->validated();
+        $data['user_id'] = $this->request->getAttribute('userId');
+
+        $ticket = Ticket::create($data);
 
         $this->producer->produce(new TicketCreated($ticket));
 
