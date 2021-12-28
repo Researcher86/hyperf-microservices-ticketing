@@ -4,22 +4,23 @@ declare(strict_types=1);
 
 namespace Tickets\Controller;
 
+use Hyperf\HttpMessage\Exception\HttpException;
+use Hyperf\HttpServer\Annotation\Controller;
+use Hyperf\HttpServer\Annotation\Middleware;
+use Hyperf\HttpServer\Annotation\RequestMapping;
+use Hyperf\Validation\Middleware\ValidationMiddleware;
+use Swoole\Http\Status;
 use Tickets\Amqp\Producer\TicketCreated;
 use Tickets\Amqp\Producer\TicketUpdated;
 use Tickets\Middleware\AuthMiddleware;
 use Tickets\Model\Ticket;
 use Tickets\Request\TicketCreateRequest;
 use Tickets\Request\TicketUpdateRequest;
-use Hyperf\HttpServer\Annotation\Controller;
-use Hyperf\HttpServer\Annotation\Middleware;
-use Hyperf\HttpServer\Annotation\RequestMapping;
-use Hyperf\Validation\Middleware\ValidationMiddleware;
-use Swoole\Http\Status;
 
 #[Controller(prefix: "/api/tickets")]
 class TicketController extends AbstractController
 {
-    #[RequestMapping(path:"", methods: "get")]
+    #[RequestMapping(path: "", methods: "get")]
     public function getTickets()
     {
         $tickets = Ticket::all();
@@ -29,15 +30,13 @@ class TicketController extends AbstractController
             ->withStatus(Status::OK);
     }
 
-    #[RequestMapping(path:"{id:\d+}", methods: "get")]
+    #[RequestMapping(path: "{id:\d+}", methods: "get")]
     public function getTicket(int $id)
     {
         $ticket = Ticket::find($id);
 
         if (!$ticket) {
-            return $this->response
-                ->json([])
-                ->withStatus(Status::NOT_FOUND);
+            throw new HttpException(Status::NOT_FOUND);
         }
 
         return $this->response
@@ -45,7 +44,7 @@ class TicketController extends AbstractController
             ->withStatus(Status::OK);
     }
 
-    #[RequestMapping(path:"create", methods: "post")]
+    #[RequestMapping(path: "create", methods: "post")]
     #[Middleware(AuthMiddleware::class)]
     #[Middleware(ValidationMiddleware::class)]
     public function create(TicketCreateRequest $request)
@@ -62,7 +61,7 @@ class TicketController extends AbstractController
             ->withStatus(Status::CREATED);
     }
 
-    #[RequestMapping(path:"{id:\d+}/update", methods: "put")]
+    #[RequestMapping(path: "{id:\d+}/update", methods: "put")]
     #[Middleware(AuthMiddleware::class)]
     #[Middleware(ValidationMiddleware::class)]
     public function update(int $id, TicketUpdateRequest $request)

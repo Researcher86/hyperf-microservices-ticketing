@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace Tickets\Tests;
 
-use Tickets\Service\JwtService;
-use Hyperf\DbConnection\Db;
 use Hyperf\Testing\Client;
 use Hyperf\Utils\Packer\JsonPacker;
 use PHPUnit\Framework\TestCase;
+use Tickets\Service\JwtService;
 
 /**
  * Class HttpTestCase.

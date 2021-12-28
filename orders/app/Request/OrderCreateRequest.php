@@ -22,7 +22,7 @@ class OrderCreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'ticket_id' =>'required|integer',
+            'ticket_id' => 'required|integer',
         ];
     }
 }

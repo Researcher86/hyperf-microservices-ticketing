@@ -24,7 +24,7 @@ class UserControllerTest extends HttpTestCase
 
         /** @var Response $response */
         $response = $this->request('GET', 'api/users/currentuser', ['headers' => ['Token' => $token]]);
-        $data = $this->jsonPacker->unpack((string) $response->getBody());
+        $data = $this->jsonPacker->unpack((string)$response->getBody());
 
         $this->assertEquals($email, $data['currentUser']['email']);
     }
@@ -33,7 +33,7 @@ class UserControllerTest extends HttpTestCase
     {
         /** @var Response $response */
         $response = $this->request('GET', 'api/users/currentuser');
-        $data = $this->jsonPacker->unpack((string) $response->getBody());
+        $data = $this->jsonPacker->unpack((string)$response->getBody());
 
         $this->assertEquals(Status::UNAUTHORIZED, $response->getStatusCode());
         $this->assertEquals('Not authorized', $data['errors']['message']);
@@ -44,7 +44,7 @@ class UserControllerTest extends HttpTestCase
         /** @var Response $response */
         $response = $this->request('POST', 'api/users/signup', ['form_params' => ['email' => $email = 'new@new.com', 'password' => 'new123']]);
         $token = $response->getHeader('Token')[0] ?? '';
-        $data = $this->jsonPacker->unpack((string) $response->getBody());
+        $data = $this->jsonPacker->unpack((string)$response->getBody());
 
         $this->assertNotEmpty($token);
         $this->assertEquals($email, $data['email']);
@@ -57,7 +57,7 @@ class UserControllerTest extends HttpTestCase
         /** @var Response $response */
         $response = $this->request('POST', 'api/users/signup', ['form_params' => ['email' => 'admin@admin.com', 'password' => 'admin']]);
         $token = $response->getHeader('Token')[0] ?? '';
-        $data = $this->jsonPacker->unpack((string) $response->getBody());
+        $data = $this->jsonPacker->unpack((string)$response->getBody());
 
         $this->assertEmpty($token);
         $this->assertEquals(Status::BAD_REQUEST, $response->getStatusCode());
@@ -69,7 +69,7 @@ class UserControllerTest extends HttpTestCase
         /** @var Response $response */
         $response = $this->request('POST', 'api/users/signup', ['form_params' => ['email' => 'new', 'password' => 'new']]);
         $token = $response->getHeader('Token')[0] ?? '';
-        $data = $this->jsonPacker->unpack((string) $response->getBody());
+        $data = $this->jsonPacker->unpack((string)$response->getBody());
 
         $this->assertEmpty($token);
         $this->assertEquals(Status::BAD_REQUEST, $response->getStatusCode());
@@ -82,7 +82,7 @@ class UserControllerTest extends HttpTestCase
         /** @var Response $response */
         $response = $this->request('POST', 'api/users/signin', ['form_params' => ['email' => $email = 'admin@admin.com', 'password' => 'admin']]);
         $token = $response->getHeader('Token')[0] ?? '';
-        $data = $this->jsonPacker->unpack((string) $response->getBody());
+        $data = $this->jsonPacker->unpack((string)$response->getBody());
 
         $this->assertNotEmpty($token);
         $this->assertEquals($email, $data['email']);
@@ -93,7 +93,7 @@ class UserControllerTest extends HttpTestCase
         /** @var Response $response */
         $response = $this->request('POST', 'api/users/signin', ['form_params' => ['email' => 'admin', 'password' => 'a']]);
         $token = $response->getHeader('Token')[0] ?? '';
-        $data = $this->jsonPacker->unpack((string) $response->getBody());
+        $data = $this->jsonPacker->unpack((string)$response->getBody());
 
         $this->assertEmpty($token);
         $this->assertEquals(Status::BAD_REQUEST, $response->getStatusCode());

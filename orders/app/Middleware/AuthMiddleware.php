@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Orders\Middleware;
 
-use Orders\Model\User;
-use Orders\Service\JwtService;
 use Hyperf\Contract\TranslatorInterface;
 use Hyperf\HttpServer\Contract\ResponseInterface as HttpResponse;
+use Orders\Model\User;
+use Orders\Service\JwtService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

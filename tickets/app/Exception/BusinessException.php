@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Tickets\Exception;
 
-use Tickets\Constants\ErrorCode;
 use Hyperf\Server\Exception\ServerException;
 use Throwable;
+use Tickets\Constants\ErrorCode;
 
 class BusinessException extends ServerException
 {

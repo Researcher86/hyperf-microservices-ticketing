@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Auth\Tests;
 
-use Hyperf\DbConnection\Db;
 use Hyperf\Testing\Client;
 use Hyperf\Utils\Packer\JsonPacker;
 use PHPUnit\Framework\TestCase;

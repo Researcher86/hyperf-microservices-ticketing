@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Tickets\Middleware;
 
-use Tickets\Model\User;
-use Tickets\Service\JwtService;
 use Hyperf\Contract\TranslatorInterface;
 use Hyperf\HttpServer\Contract\ResponseInterface as HttpResponse;
 use Psr\Http\Message\ResponseInterface;
@@ -13,6 +11,8 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Swoole\Http\Status;
+use Tickets\Model\User;
+use Tickets\Service\JwtService;
 
 class AuthMiddleware implements MiddlewareInterface
 {

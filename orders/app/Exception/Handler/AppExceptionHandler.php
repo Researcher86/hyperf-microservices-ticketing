@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Orders\Exception\Handler;
 
-use Orders\Exception\BusinessException;
 use Hyperf\ExceptionHandler\ExceptionHandler;
 use Hyperf\HttpMessage\Stream\SwooleStream;
+use Orders\Exception\BusinessException;
 use Psr\Http\Message\ResponseInterface;
 use Throwable;
 

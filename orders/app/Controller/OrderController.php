@@ -6,6 +6,10 @@ namespace Orders\Controller;
 
 use DateTime;
 use Hyperf\HttpMessage\Exception\HttpException;
+use Hyperf\HttpServer\Annotation\Controller;
+use Hyperf\HttpServer\Annotation\Middleware;
+use Hyperf\HttpServer\Annotation\RequestMapping;
+use Hyperf\Validation\Middleware\ValidationMiddleware;
 use Orders\Amqp\Producer\OrderCanceled;
 use Orders\Amqp\Producer\OrderCreated;
 use Orders\Exception\BusinessException;
@@ -13,16 +17,12 @@ use Orders\Middleware\AuthMiddleware;
 use Orders\Model\Order;
 use Orders\Model\Ticket;
 use Orders\Request\OrderCreateRequest;
-use Hyperf\HttpServer\Annotation\Controller;
-use Hyperf\HttpServer\Annotation\Middleware;
-use Hyperf\HttpServer\Annotation\RequestMapping;
-use Hyperf\Validation\Middleware\ValidationMiddleware;
 use Swoole\Http\Status;
 
 #[Controller(prefix: "/api/orders")]
 class OrderController extends AbstractController
 {
-    #[RequestMapping(path:"", methods: "get")]
+    #[RequestMapping(path: "", methods: "get")]
     #[Middleware(AuthMiddleware::class)]
     public function getOrders()
     {
@@ -41,7 +41,7 @@ class OrderController extends AbstractController
             ->withStatus(Status::OK);
     }
 
-    #[RequestMapping(path:"{id:\d+}", methods: "get")]
+    #[RequestMapping(path: "{id:\d+}", methods: "get")]
     #[Middleware(AuthMiddleware::class)]
     public function getOrder(int $id)
     {
@@ -63,7 +63,7 @@ class OrderController extends AbstractController
             ->withStatus(Status::OK);
     }
 
-    #[RequestMapping(path:"create", methods: "post")]
+    #[RequestMapping(path: "create", methods: "post")]
     #[Middleware(AuthMiddleware::class)]
     #[Middleware(ValidationMiddleware::class)]
     public function create(OrderCreateRequest $request)
@@ -99,7 +99,7 @@ class OrderController extends AbstractController
             ->withStatus(Status::CREATED);
     }
 
-    #[RequestMapping(path:"{id:\d+}/delete", methods: "delete")]
+    #[RequestMapping(path: "{id:\d+}/delete", methods: "delete")]
     #[Middleware(AuthMiddleware::class)]
     #[Middleware(ValidationMiddleware::class)]
     public function delete(int $id)
@@ -107,13 +107,11 @@ class OrderController extends AbstractController
         $userId = $this->request->getAttribute('userId');
         $order = Order::find($id);
 
-        if (!$order)
-        {
+        if (!$order) {
             throw new HttpException(Status::NOT_FOUND);
         }
 
-        if ($order->user_id !== $userId)
-        {
+        if ($order->user_id !== $userId) {
             throw new HttpException(Status::UNAUTHORIZED);
         }
 

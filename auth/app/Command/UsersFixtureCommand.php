@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Auth\Command;
 
 use Auth\Model\User;
-use Hyperf\Command\Command as HyperfCommand;
 use Hyperf\Command\Annotation\Command;
+use Hyperf\Command\Command as HyperfCommand;
 use Psr\Container\ContainerInterface;
 
 #[Command]

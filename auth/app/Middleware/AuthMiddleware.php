@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Auth\Middleware;
 
-use Auth\Model\User;
 use Auth\Service\JwtService;
 use Hyperf\Contract\TranslatorInterface;
 use Hyperf\HttpServer\Contract\ResponseInterface as HttpResponse;

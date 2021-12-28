@@ -28,7 +28,7 @@ class UserController extends AbstractController
         $this->jwtService = $jwtService;
     }
 
-    #[RequestMapping(path:"currentuser", methods: "get")]
+    #[RequestMapping(path: "currentuser", methods: "get")]
     #[Middleware(AuthMiddleware::class)]
     public function currentUser()
     {
@@ -37,10 +37,10 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[RequestMapping(path:"signup", methods: "post")]
+    #[RequestMapping(path: "signup", methods: "post")]
     public function signup(SignupRequest $request)
     {
-        ['email' => $email, 'password' => $password] =  $request->validated();
+        ['email' => $email, 'password' => $password] = $request->validated();
 
         $user = User::query()->where(['email' => $email])->first();
 
@@ -61,10 +61,10 @@ class UserController extends AbstractController
             ->withStatus(Status::CREATED);
     }
 
-    #[RequestMapping(path:"signin", methods: "post")]
+    #[RequestMapping(path: "signin", methods: "post")]
     public function signin(SigninRequest $request)
     {
-        ['email' => $email, 'password' => $password] =  $request->validated();
+        ['email' => $email, 'password' => $password] = $request->validated();
 
         $user = User::query()->where(['email' => $email])->first();
         if (!$user || !password_verify($password, $user->password)) {
@@ -82,7 +82,7 @@ class UserController extends AbstractController
             ->withStatus(Status::OK);
     }
 
-    #[RequestMapping(path:"signout", methods: "post")]
+    #[RequestMapping(path: "signout", methods: "post")]
     #[Middleware(AuthMiddleware::class)]
     public function signout()
     {

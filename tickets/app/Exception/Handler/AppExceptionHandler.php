@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Tickets\Exception\Handler;
 
-use Tickets\Exception\BusinessException;
 use Hyperf\ExceptionHandler\ExceptionHandler;
 use Hyperf\HttpMessage\Stream\SwooleStream;
 use Psr\Http\Message\ResponseInterface;
 use Throwable;
+use Tickets\Exception\BusinessException;
 
 class AppExceptionHandler extends ExceptionHandler
 {

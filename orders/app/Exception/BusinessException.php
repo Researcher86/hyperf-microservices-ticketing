@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Orders\Exception;
 
-use Orders\Constants\ErrorCode;
 use Hyperf\Server\Exception\ServerException;
+use Orders\Constants\ErrorCode;
 use Throwable;
 
 class BusinessException extends ServerException

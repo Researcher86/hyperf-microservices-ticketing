@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Tickets\Tests\Cases;
 
-use Tickets\Model\Ticket;
-use Tickets\Tests\HttpTestCase;
 use Hyperf\HttpMessage\Server\Response;
 use Swoole\Http\Status;
+use Tickets\Model\Ticket;
+use Tickets\Tests\HttpTestCase;
 
 /**
  * @internal
@@ -28,7 +28,7 @@ class TicketControllerTest extends HttpTestCase
 
         $this->assertEquals(Status::OK, $response->getStatusCode());
 
-        $data = $this->jsonPacker->unpack((string) $response->getBody());
+        $data = $this->jsonPacker->unpack((string)$response->getBody());
         $this->assertCount(1, $data);
     }
 
@@ -45,7 +45,7 @@ class TicketControllerTest extends HttpTestCase
 
         $this->assertEquals(Status::OK, $response->getStatusCode());
 
-        $data = $this->jsonPacker->unpack((string) $response->getBody());
+        $data = $this->jsonPacker->unpack((string)$response->getBody());
 
         $this->assertEquals(1, $data['user_id']);
         $this->assertEquals('Ticket 1', $data['title']);
@@ -152,7 +152,7 @@ class TicketControllerTest extends HttpTestCase
 
         $this->assertEquals(Status::CREATED, $response->getStatusCode());
 
-        $data = $this->jsonPacker->unpack((string) $response->getBody());
+        $data = $this->jsonPacker->unpack((string)$response->getBody());
 
         $this->assertEquals($userId, $data['user_id']);
         $this->assertEquals($title, $data['title']);

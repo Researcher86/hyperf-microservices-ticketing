@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Orders\Tests\Cases;
 
 use DateTime;
+use Hyperf\HttpMessage\Server\Response;
 use Orders\Model\Order;
 use Orders\Model\Ticket;
 use Orders\Tests\HttpTestCase;
-use Hyperf\HttpMessage\Server\Response;
 use Swoole\Http\Status;
 
 /**
@@ -49,7 +49,7 @@ class OrderControllerTest extends HttpTestCase
 
         /** @var Response $response */
         $response = $this->request('GET', 'api/orders', ['headers' => ['Token' => $tokenForUserOne]]);
-        $data = $this->jsonPacker->unpack((string) $response->getBody());
+        $data = $this->jsonPacker->unpack((string)$response->getBody());
 
         $this->assertEquals(Status::OK, $response->getStatusCode());
         $this->assertCount(2, $data);
@@ -60,7 +60,7 @@ class OrderControllerTest extends HttpTestCase
 
         /** @var Response $response */
         $response = $this->request('GET', 'api/orders', ['headers' => ['Token' => $tokenForUserTwo]]);
-        $data = $this->jsonPacker->unpack((string) $response->getBody());
+        $data = $this->jsonPacker->unpack((string)$response->getBody());
 
         $this->assertEquals(Status::OK, $response->getStatusCode());
         $this->assertCount(1, $data);
@@ -83,7 +83,7 @@ class OrderControllerTest extends HttpTestCase
 
         /** @var Response $response */
         $response = $this->request('GET', 'api/orders/' . $orderOne->id, ['headers' => ['Token' => $tokenForUserOne]]);
-        $data = $this->jsonPacker->unpack((string) $response->getBody());
+        $data = $this->jsonPacker->unpack((string)$response->getBody());
 
         $this->assertEquals(Status::OK, $response->getStatusCode());
         $this->assertEquals($orderOne->id, $data['id']);
@@ -164,7 +164,7 @@ class OrderControllerTest extends HttpTestCase
 
         /** @var Response $response */
         $response = $this->request('DELETE', sprintf('api/orders/%d/delete', $orderOne->id), ['headers' => ['Token' => $tokenForUserOne]]);
-        $data = $this->jsonPacker->unpack((string) $response->getBody());
+        $data = $this->jsonPacker->unpack((string)$response->getBody());
 
         $this->assertEquals(Status::NO_CONTENT, $response->getStatusCode());
         $this->assertEquals(Order::STATUS_CANCELLED, $orderOne->fresh()->status);

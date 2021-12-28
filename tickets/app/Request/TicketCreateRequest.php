@@ -22,8 +22,8 @@ class TicketCreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' =>'required|string|min:4',
-            'price' =>'required|integer|min:1',
+            'title' => 'required|string|min:4',
+            'price' => 'required|integer|min:1',
         ];
     }
 }

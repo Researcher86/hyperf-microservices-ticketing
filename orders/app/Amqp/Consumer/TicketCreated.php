@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Orders\Amqp\Consumer;
 
-use Hyperf\Amqp\Result;
 use Hyperf\Amqp\Annotation\Consumer;
 use Hyperf\Amqp\Message\ConsumerMessage;
+use Hyperf\Amqp\Result;
 use Orders\Model\Ticket;
 use PhpAmqpLib\Message\AMQPMessage;
 

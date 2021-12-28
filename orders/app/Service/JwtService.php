@@ -32,7 +32,7 @@ class JwtService
 
     public function decode(string $jwtToken): array
     {
-        return (array) JWT::decode($jwtToken, new Key($this->jwtKey, 'HS256'));
+        return (array)JWT::decode($jwtToken, new Key($this->jwtKey, 'HS256'));
     }
 
     public function verify(string $jwtToken): bool

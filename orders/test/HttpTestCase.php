@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace Orders\Tests;
 
-use Orders\Service\JwtService;
-use Hyperf\DbConnection\Db;
 use Hyperf\Testing\Client;
 use Hyperf\Utils\Packer\JsonPacker;
+use Orders\Service\JwtService;
 use PHPUnit\Framework\TestCase;
 
 /**
