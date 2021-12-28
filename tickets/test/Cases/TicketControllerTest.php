@@ -206,4 +206,25 @@ class TicketControllerTest extends HttpTestCase
 
         $this->assertEquals(Status::UNAUTHORIZED, $response->getStatusCode());
     }
+
+    public function testUpdateTicketUserCannotEditReservedTicket()
+    {
+        $ticket = Ticket::create([
+            'user_id' => 5,
+            'order_id' => 5,
+            'title' => 'Ticket',
+            'price' => 10
+        ]);
+
+        $token = $this->generateToken(['id' => 5, 'email' => 'test@test.com']);
+        $data = ['title' => 'Ticket 2', 'price' => 20];
+
+        /** @var Response $response */
+        $response = $this->request('PUT',
+            sprintf('api/tickets/%d/update', $ticket->id),
+            ['headers' => ['Token' => $token], 'form_params' => $data]
+        );
+
+        $this->assertEquals(Status::BAD_REQUEST, $response->getStatusCode());
+    }
 }

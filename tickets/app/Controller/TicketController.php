@@ -69,11 +69,12 @@ class TicketController extends AbstractController
         $userId = $this->request->getAttribute('userId');
         $ticket = Ticket::find($id);
 
-        if ($ticket->user_id !== $userId)
-        {
-            return $this->response
-                ->json([])
-                ->withStatus(Status::UNAUTHORIZED);
+        if ($ticket->user_id !== $userId) {
+            throw new HttpException(Status::UNAUTHORIZED);
+        }
+
+        if ($ticket->order_id) {
+            throw new HttpException(Status::BAD_REQUEST, 'Cannot edit a reserved ticket');
         }
 
         $ticket->update($request->validated());
