@@ -6,12 +6,13 @@ namespace Orders\Amqp\Producer;
 
 use Hyperf\Amqp\Annotation\Producer;
 use Hyperf\Amqp\Message\ProducerMessage;
+use Orders\Model\Order;
 
 #[Producer(exchange: 'orders', routingKey: 'order-canceled')]
 class OrderCanceled extends ProducerMessage
 {
-    public function __construct(int $orderId, int $ticketId)
+    public function __construct(Order $order)
     {
-        $this->payload = ['id' => $orderId, 'ticket_id' => $ticketId];
+        $this->payload = $order;
     }
 }

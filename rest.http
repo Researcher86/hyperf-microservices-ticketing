@@ -47,3 +47,35 @@ GET localhost:9501/api/users/currentuser
 Content-Type: application/json
 Token: {{ token }}
 ###
+
+#=======================================================================================================================
+POST localhost:9501/api/users/signin
+Content-Type: application/json
+
+{
+    "email": "admin@admin.com",
+    "password": "admin"
+}
+> {%
+  client.global.set('token', response.headers.valuesOf("Token")[0]);
+%}
+###
+
+POST localhost:9502/api/tickets/create
+Content-Type: application/json
+Token: {{ token }}
+
+{
+    "title": "Ticket 1",
+    "price": 123
+}
+###
+
+POST localhost:9503/api/orders/create
+Content-Type: application/json
+Token: {{ token }}
+
+{
+    "ticket_id": 1
+}
+###

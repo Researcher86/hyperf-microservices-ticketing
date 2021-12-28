@@ -89,6 +89,7 @@ class OrderController extends AbstractController
         $data['user_id'] = $this->request->getAttribute('userId');
         $data['status'] = Order::STATUS_CREATED;
         $data['expires_at'] = (new DateTime())->modify('+15 minutes')->format('Y-m-d H:i:s');
+//        $data['expires_at'] = (new DateTime())->modify('+15 seconds')->format('Y-m-d H:i:s');
 
         $order = Order::create($data);
         $order->ticket;
@@ -117,7 +118,8 @@ class OrderController extends AbstractController
 
         $order->update(['status' => Order::STATUS_CANCELLED]);
 
-        $this->producer->produce(new OrderCanceled($order->id, $order->ticket_id));
+        $order->ticket;
+        $this->producer->produce(new OrderCanceled($order));
 
         return $this->response
             ->json([])

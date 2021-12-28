@@ -16,6 +16,8 @@ down:
 down-all:
 	docker-compose down -v
 
+redis-cli:
+	docker-compose exec redis redis-cli
 
 client-bash:
 	docker-compose exec client sh
@@ -28,6 +30,9 @@ tickets-bash:
 
 orders-bash:
 	docker-compose exec orders bash
+
+expiration-bash:
+	docker-compose exec expiration bash
 
 auth-test:
 	docker-compose exec auth php bin/hyperf.php migrate:fresh --seed
@@ -49,6 +54,9 @@ gen-producer:
 
 gen-consumer:
 	docker-compose exec hyperf php bin/hyperf.php gen:amqp-consumer DemoConsumer
+
+gen-job:
+	docker-compose exec hyperf php bin/hyperf.php gen:job OrderCompleteJob
 
 gen-command:
 	docker-compose exec hyperf php bin/hyperf.php gen:command FooCommand
@@ -75,11 +83,16 @@ migrate:
 #    php bin/hyperf.php migrate:refresh --seed
 #    php bin/hyperf.php migrate:fresh
 
+db-refresh:
+	docker-compose exec auth php bin/hyperf.php migrate:fresh --seed
+	docker-compose exec tickets php bin/hyperf.php migrate:fresh
+	docker-compose exec orders php bin/hyperf.php migrate:fresh
 
 php-clear:
 	rm -rf auth/runtime/container
 	rm -rf tickets/runtime/container
 	rm -rf orders/runtime/container
+	rm -rf expiration/runtime/container
 
 # make bench
 bench:

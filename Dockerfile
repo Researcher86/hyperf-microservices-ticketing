@@ -46,6 +46,9 @@ EXPOSE 9501
 FROM base as orders
 EXPOSE 9501
 
+FROM base as expiration
+EXPOSE 9501
+
 
 FROM node:17-alpine as node-base
 WORKDIR /opt/www

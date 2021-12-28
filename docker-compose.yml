@@ -107,6 +107,23 @@ services:
         volumes:
             - orders_db_data:/var/lib/mysql
 
+    expiration:
+        build:
+            context: .
+            dockerfile: Dockerfile
+            target: expiration
+        container_name: expiration
+        environment:
+            - COMPOSER_ALLOW_SUPERUSER=true
+        ports:
+            -   "9504:9501"
+        volumes:
+            -   ./expiration:/opt/www
+        entrypoint: ["php", "/opt/www/bin/hyperf.php", "server:watch"]
+        depends_on:
+            - redis
+            - rabbit-mq
+
     redis:
         image: redis:6.0
         container_name: redis
