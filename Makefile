@@ -34,6 +34,9 @@ orders-bash:
 expiration-bash:
 	docker-compose exec expiration bash
 
+payments-bash:
+	docker-compose exec payments bash
+
 auth-test:
 	docker-compose exec auth php bin/hyperf.php migrate:fresh --seed
 	docker-compose exec auth composer test
@@ -47,7 +50,11 @@ orders-test:
 	docker-compose exec orders php bin/hyperf.php migrate:fresh
 	docker-compose exec orders composer test
 
-test: auth-test tickets-test orders-test
+payments-test:
+	docker-compose exec payments php bin/hyperf.php migrate:fresh
+	docker-compose exec payments composer test
+
+test: auth-test tickets-test orders-test payments-test
 
 gen-producer:
 	docker-compose exec hyperf php bin/hyperf.php gen:amqp-producer DemoProducer
@@ -78,6 +85,7 @@ migrate:
 	docker-compose exec auth php bin/hyperf.php users:fixture
 	docker-compose exec tickets php bin/hyperf.php migrate
 	docker-compose exec orders php bin/hyperf.php migrate
+	docker-compose exec payments php bin/hyperf.php migrate
 #    php bin/hyperf.php migrate:refresh --step=5
 #    php bin/hyperf.php migrate:refresh
 #    php bin/hyperf.php migrate:refresh --seed
@@ -87,12 +95,14 @@ db-refresh:
 	docker-compose exec auth php bin/hyperf.php migrate:fresh --seed
 	docker-compose exec tickets php bin/hyperf.php migrate:fresh
 	docker-compose exec orders php bin/hyperf.php migrate:fresh
+	docker-compose exec payments php bin/hyperf.php migrate:fresh
 
 php-clear:
 	rm -rf auth/runtime/container
 	rm -rf tickets/runtime/container
 	rm -rf orders/runtime/container
 	rm -rf expiration/runtime/container
+	rm -rf payments/runtime/container
 
 # make bench
 bench:

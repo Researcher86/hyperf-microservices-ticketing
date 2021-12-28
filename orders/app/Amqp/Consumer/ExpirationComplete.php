@@ -9,7 +9,7 @@ use Hyperf\Amqp\Producer;
 use Hyperf\Amqp\Result;
 use Hyperf\Amqp\Annotation\Consumer;
 use Hyperf\Amqp\Message\ConsumerMessage;
-use Orders\Amqp\Producer\OrderCanceled;
+use Orders\Amqp\Producer\OrderCancelled;
 use Orders\Model\Order;
 use PhpAmqpLib\Message\AMQPMessage;
 
@@ -37,7 +37,7 @@ class ExpirationComplete extends ConsumerMessage
         $order->update(['status' => Order::STATUS_CANCELLED]);
 
         $order->ticket;
-        $this->producer->produce(new OrderCanceled($order));
+        $this->producer->produce(new OrderCancelled($order));
 
         return Result::ACK;
     }

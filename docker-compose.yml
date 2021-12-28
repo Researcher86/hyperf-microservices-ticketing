@@ -115,14 +115,44 @@ services:
         container_name: expiration
         environment:
             - COMPOSER_ALLOW_SUPERUSER=true
-        ports:
-            -   "9504:9501"
+#        ports:
+#            -   "9504:9501"
         volumes:
             -   ./expiration:/opt/www
         entrypoint: ["php", "/opt/www/bin/hyperf.php", "server:watch"]
         depends_on:
             - redis
             - rabbit-mq
+
+    payments:
+        build:
+            context: .
+            dockerfile: Dockerfile
+            target: payments
+        container_name: payments
+        environment:
+            - COMPOSER_ALLOW_SUPERUSER=true
+        ports:
+            -   "9505:9501"
+        volumes:
+            -   ./payments:/opt/www
+        entrypoint: ["php", "/opt/www/bin/hyperf.php", "server:watch"]
+        depends_on:
+            - payments-mysql
+            - rabbit-mq
+
+    payments-mysql:
+        image: mysql:5.7
+        restart: unless-stopped
+        container_name: payments-mysql
+        environment:
+            - MYSQL_DATABASE=payments
+            - MYSQL_ROOT_PASSWORD=root
+            - MYSQL_ALLOW_EMPTY_PASSWORD=1
+        ports:
+            - "3313:3306"
+        volumes:
+            - payments_db_data:/var/lib/mysql
 
     redis:
         image: redis:6.0
@@ -148,5 +178,8 @@ volumes:
         driver: local
     orders_db_data:
         name: orders_db_data
+        driver: local
+    payments_db_data:
+        name: payments_db_data
         driver: local
 

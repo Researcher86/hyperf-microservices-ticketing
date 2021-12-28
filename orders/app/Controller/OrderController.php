@@ -10,7 +10,7 @@ use Hyperf\HttpServer\Annotation\Controller;
 use Hyperf\HttpServer\Annotation\Middleware;
 use Hyperf\HttpServer\Annotation\RequestMapping;
 use Hyperf\Validation\Middleware\ValidationMiddleware;
-use Orders\Amqp\Producer\OrderCanceled;
+use Orders\Amqp\Producer\OrderCancelled;
 use Orders\Amqp\Producer\OrderCreated;
 use Orders\Exception\BusinessException;
 use Orders\Middleware\AuthMiddleware;
@@ -119,7 +119,7 @@ class OrderController extends AbstractController
         $order->update(['status' => Order::STATUS_CANCELLED]);
 
         $order->ticket;
-        $this->producer->produce(new OrderCanceled($order));
+        $this->producer->produce(new OrderCancelled($order));
 
         return $this->response
             ->json([])

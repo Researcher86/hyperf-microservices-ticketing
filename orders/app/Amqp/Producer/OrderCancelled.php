@@ -8,8 +8,8 @@ use Hyperf\Amqp\Annotation\Producer;
 use Hyperf\Amqp\Message\ProducerMessage;
 use Orders\Model\Order;
 
-#[Producer(exchange: 'orders', routingKey: 'order-canceled')]
-class OrderCanceled extends ProducerMessage
+#[Producer(exchange: 'orders', routingKey: 'order-cancelled')]
+class OrderCancelled extends ProducerMessage
 {
     public function __construct(Order $order)
     {

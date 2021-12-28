@@ -79,3 +79,13 @@ Token: {{ token }}
     "ticket_id": 1
 }
 ###
+
+POST localhost:9505/api/payments
+Content-Type: application/json
+Token: {{ token }}
+
+{
+    "token": "tok_visa",
+    "order_id": 1
+}
+###
