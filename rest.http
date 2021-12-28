@@ -48,7 +48,8 @@ Content-Type: application/json
 Token: {{ token }}
 ###
 
-#=======================================================================================================================
+#==========================================================Testing======================================================
+# 1.
 POST localhost:9501/api/users/signin
 Content-Type: application/json
 
@@ -61,6 +62,7 @@ Content-Type: application/json
 %}
 ###
 
+# 2.
 POST localhost:9502/api/tickets/create
 Content-Type: application/json
 Token: {{ token }}
@@ -71,6 +73,7 @@ Token: {{ token }}
 }
 ###
 
+# 3.
 POST localhost:9503/api/orders/create
 Content-Type: application/json
 Token: {{ token }}
@@ -80,6 +83,7 @@ Token: {{ token }}
 }
 ###
 
+# 4.
 POST localhost:9505/api/payments
 Content-Type: application/json
 Token: {{ token }}
