@@ -9,6 +9,9 @@ use Hyperf\HttpMessage\Exception\HttpException;
 use Hyperf\HttpServer\Annotation\Controller;
 use Hyperf\HttpServer\Annotation\Middleware;
 use Hyperf\HttpServer\Annotation\RequestMapping;
+use Hyperf\Task\Task;
+use Hyperf\Task\TaskExecutor;
+use Hyperf\Utils\Coroutine;
 use Hyperf\Validation\Middleware\ValidationMiddleware;
 use Orders\Amqp\Producer\OrderCancelled;
 use Orders\Amqp\Producer\OrderCreated;
@@ -17,6 +20,7 @@ use Orders\Middleware\AuthMiddleware;
 use Orders\Model\Order;
 use Orders\Model\Ticket;
 use Orders\Request\OrderCreateRequest;
+use Orders\Task\PublishMessageCreatedOrder;
 use Swoole\Http\Status;
 
 #[Controller(prefix: "/api/orders")]
@@ -66,7 +70,7 @@ class OrderController extends AbstractController
     #[RequestMapping(path: "create", methods: "post")]
     #[Middleware(AuthMiddleware::class)]
     #[Middleware(ValidationMiddleware::class)]
-    public function create(OrderCreateRequest $request)
+    public function create(OrderCreateRequest $request, TaskExecutor $taskExecutor, PublishMessageCreatedOrder $publishMessageCreatedOrder)
     {
         $data = $request->validated();
         $ticketId = $data['ticket_id'];
@@ -94,6 +98,9 @@ class OrderController extends AbstractController
         $order = Order::create($data);
         $order->ticket;
         $this->producer->produce(new OrderCreated($order));
+//        Выполнение фоновой задачки
+//        $publishMessageCreatedOrder->handle($order);
+//        $taskExecutor->execute(new Task([PublishMessageCreatedOrder::class, 'handle'], [$order]));
 
         return $this->response
             ->json($order)

@@ -29,6 +29,7 @@
         "hyperf/process": "~2.2.0",
         "hyperf/redis": "^2.2",
         "hyperf/session": "^2.2",
+        "hyperf/task": "^2.2",
         "hyperf/tracer": "~2.2.0",
         "hyperf/validation": "^2.2"
     },

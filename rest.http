@@ -49,6 +49,22 @@ Token: {{ token }}
 ###
 
 #==========================================================Testing======================================================
+#### Authorization by token, part 1. Retrieve and save token.
+#POST https://httpbin.org/post
+#Content-Type: application/json
+#
+#{
+#    "token": "my-secret-token"
+#}
+#
+#> {% client.global.set("auth_token", response.body.json.token); %}
+#
+#### Authorization by token, part 2. Use token to authorize.
+#GET https://httpbin.org/headers
+#Authorization: Bearer {{auth_token}}
+#
+####
+
 # 1.
 POST localhost:9501/api/users/signin
 Content-Type: application/json
@@ -79,7 +95,7 @@ Content-Type: application/json
 Token: {{ token }}
 
 {
-    "ticket_id": 1
+    "ticket_id": 4
 }
 ###
 
