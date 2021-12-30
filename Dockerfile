@@ -13,10 +13,14 @@ ENV TIMEZONE=${timezone:-"Asia/Shanghai"} \
 
 # update
 RUN set -ex \
+#    && apk add --no-cache --virtual .build-deps $PHPIZE_DEPS \
+#    && ln -s /usr/bin/pecl8 /usr/local/bin/pecl \
     # show php version and extensions
     && php -v \
     && php -m \
     && php --ri swoole \
+#    && pecl install xdebug \
+#    && echo "zend_extension=xdebug.so" > /etc/php8/conf.d/20_xdebug.ini \
     #  ---------- some config ----------
     && cd /etc/php8 \
     # - config PHP

@@ -26,6 +26,10 @@ services:
         container_name: auth
         environment:
             - COMPOSER_ALLOW_SUPERUSER=true
+#            - XDEBUG_CONFIG=client_host=host.docker.internal start_with_request=trigger
+#            - XDEBUG_MODE=debug
+#            - XDEBUG_SESSION=PHPSTORM
+#            - PHP_IDE_CONFIG=serverName=auth
         ports:
             -   "9501:9501"
         volumes:
@@ -55,6 +59,10 @@ services:
         container_name: tickets
         environment:
             - COMPOSER_ALLOW_SUPERUSER=true
+#            - XDEBUG_CONFIG=client_host=host.docker.internal start_with_request=trigger
+#            - XDEBUG_MODE=of
+#            - XDEBUG_SESSION=PHPSTORM
+#            - PHP_IDE_CONFIG=serverName=tickets
         ports:
             -   "9502:9501"
         volumes:
@@ -85,6 +93,10 @@ services:
         container_name: orders
         environment:
             - COMPOSER_ALLOW_SUPERUSER=true
+#            - XDEBUG_CONFIG=client_host=host.docker.internal start_with_request=trigger
+#            - XDEBUG_MODE=of
+#            - XDEBUG_SESSION=PHPSTORM
+#            - PHP_IDE_CONFIG=serverName=orders
         ports:
             -   "9503:9501"
         volumes:
@@ -115,6 +127,10 @@ services:
         container_name: expiration
         environment:
             - COMPOSER_ALLOW_SUPERUSER=true
+#            - XDEBUG_CONFIG=client_host=host.docker.internal start_with_request=trigger
+#            - XDEBUG_MODE=of
+#            - XDEBUG_SESSION=PHPSTORM
+#            - PHP_IDE_CONFIG=serverName=expiration
 #        ports:
 #            -   "9504:9501"
         volumes:
@@ -132,6 +148,10 @@ services:
         container_name: payments
         environment:
             - COMPOSER_ALLOW_SUPERUSER=true
+#            - XDEBUG_CONFIG=client_host=host.docker.internal start_with_request=trigger
+#            - XDEBUG_MODE=of
+#            - XDEBUG_SESSION=PHPSTORM
+#            - PHP_IDE_CONFIG=serverName=payments
         ports:
             -   "9505:9501"
         volumes:
